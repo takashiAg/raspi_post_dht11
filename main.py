@@ -10,10 +10,11 @@ Mac_address=mac_address.macaddress()
 
 def post(humi,temp):
     try:
-        params = {'data': humi,'id':Mac_address+"humi"}
+        params = {'data': str(humi),'id':Mac_address+"humi"}
         data = urllib.urlencode(params)
         d = urllib.urlopen(url, data)
-        params = {'data': temp,'id':Mac_address+"temp"}
+        print(d)
+        params = {'data': str(temp),'id':Mac_address+"temp"}
         data = urllib.urlencode(params)
         d = urllib.urlopen(url, data)
         print(d)
