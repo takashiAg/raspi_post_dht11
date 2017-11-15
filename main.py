@@ -1,8 +1,27 @@
-
+import mac_address
 import RPi.GPIO as GPIO
 import dht11
 import time
-import datetime
+import urllib
+import threading
+
+url = "http://html.takashia.xyz/post_twelite.php"
+Mac_address=mac_address.macaddress()
+
+def post(humi,temp):
+    try:
+        params = {'data': humi,'id':Mac_address+"humi"}
+        data = urllib.urlencode(params)
+        d = urllib.urlopen(url, data)
+        params = {'data': temp,'id':Mac_address+"temp"}
+        data = urllib.urlencode(params)
+        d = urllib.urlopen(url, data)
+        print(d)
+        print("I send a message to " + url + "\nmessage:" + arg)
+    except:
+        print("I try to send a message but missed it")
+        return 0
+    return 0
 
 def main():
     GPIO.setwarnings(False)
@@ -10,14 +29,15 @@ def main():
     GPIO.cleanup()
 
     # read data using pin 14
-    DHT = dht11.DHT11(pin=14)
+    DHT = dht11.DHT11(pin=4)
 
     while True:
         result = DHT.read()
         if result.is_valid():
             print("Temperature: %d C" % result.temperature)
             print("Humidity: %d %%" % result.humidity)
-
+            threading.Thread(target=post, args=(result.humidity,result.temperature,)).start()
+            time.sleep(20)
         time.sleep(1)
 
 if __name__=="__main__":
