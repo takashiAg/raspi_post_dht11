@@ -40,6 +40,9 @@ def main():
     temp=0
     humi=0
     while True:
+        print(i)
+        print(humi)
+        print(temp)
         result = DHT.read()
         if result.is_valid():
             temp+=result.temperature
