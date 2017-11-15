@@ -1,4 +1,4 @@
-import uuid.getnode
+import uuid
 
 def macaddress():
     macaddress_dec=uuid.getnode()

@@ -5,7 +5,7 @@ import time
 import urllib
 import threading
 
-url = "http://html.takashia.xyz/post_twelite.php"
+url = "http://html.takashia.xyz/post_ESP.php"
 Mac_address=mac_address.macaddress()
 
 def post(humi,temp):
@@ -27,6 +27,7 @@ def main():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     GPIO.cleanup()
+    GPIO.setup(6,GPIO.OUT)
     GPIO.output(6, True)
 
     # read data using pin 14
