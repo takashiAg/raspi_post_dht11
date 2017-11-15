@@ -14,11 +14,12 @@ def post(humi,temp):
         data = urllib.urlencode(params)
         d = urllib.urlopen(url, data)
         print(d)
+        print("I send a message to " + url + "\nmessage:" + humi)
         params = {'data': str(temp),'id':Mac_address+"temp"}
         data = urllib.urlencode(params)
         d = urllib.urlopen(url, data)
         print(d)
-        print("I send a message to " + url + "\nmessage:" + arg)
+        print("I send a message to " + url + "\nmessage:" + temp)
     except:
         print("I try to send a message but missed it")
         return 0
