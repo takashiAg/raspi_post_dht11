@@ -27,9 +27,10 @@ def main():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     GPIO.cleanup()
+    GPIO.output(6, True)
 
     # read data using pin 14
-    DHT = dht11.DHT11(pin=4)
+    DHT = dht11.DHT11(pin=5)
 
     while True:
         result = DHT.read()
