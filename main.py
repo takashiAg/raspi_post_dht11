@@ -36,14 +36,22 @@ def main():
 
     # read data using pin 14
     DHT = dht11.DHT11(pin=5)
-
+    i=0
+    temp=0
+    humi=0
     while True:
         result = DHT.read()
         if result.is_valid():
+            temp+=result.temperature
+            humi+=result.humidity
             print("Temperature: %d C" % result.temperature)
             print("Humidity: %d %%" % result.humidity)
-            threading.Thread(target=post, args=(result.humidity, result.temperature,)).start()
-            time.sleep(20)
+            i+=1
+        if i>=30:
+            threading.Thread(target=post, args=(temp/30, humi/30,)).start()
+            humi=0
+            temp=0
+            i=0
         time.sleep(1)
 
 
