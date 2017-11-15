@@ -48,7 +48,7 @@ def main():
             print("Humidity: %d %%" % result.humidity)
             i+=1
         if i>=30:
-            threading.Thread(target=post, args=(temp/30, humi/30,)).start()
+            threading.Thread(target=post, args=(humi/i, temp/i,)).start()
             humi=0
             temp=0
             i=0
